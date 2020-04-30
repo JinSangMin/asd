@@ -1,0 +1,66 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{newtxtext}
+\usepackage{newtxmath}                
+\usepackage{commath}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{theorem}
+Let $X_1,X_2,\ldots$ be $i.i.d.$ with $E\abs{X_1}=\infty$ and let $S_n=X_1+\cdots+X_n$. Let $a_n$ be a sequence of positive numbers with $a_n/n$ increasing. Then $\limsup_{n\rightarrow \infty}{\abs{S_n}/a_n}=0$ or $\infty$ according as $\sum_{n}{P(\,\abs{X_1}\geq a_n)}<\infty$ or $=\infty$
+
+\begin{proof}
+Since $a_n/n \uparrow$, $a_{kn}\geq ka_n$ for any integer $k$. Using this and $a_n\uparrow$,
+\begin{equation*}
+\sum_{n=1}^{\infty}{P(\,\abs{X_1}\geq ka_n)}\geq \sum_{k=1}^{\infty}{P(\,\abs{X_1}\geq a_{kn})}\geq
+\frac{1}{k}\sum_{m=k}^{\infty}{P(\,\abs{X_1}\geq a_{m})}
+\end{equation*}
+The last observation shows that if the sum is infinite,$\limsup_{n\rightarrow \infty}{\abs{X_n}/a_n}=\infty$.
+Since $max\lbrace\,\abs{S_{n-1}},\abs{S_{n}}\rbrace \geq \abs{X_n}/2$, it follows that $\limsup_{n\rightarrow \infty}{\abs{S_n}/a_n}=\infty$.\\
+\indent To prove the other half, we begin with the identity
+\begin{flalign*}
+(\ast) && \sum_{m=1}^{\infty}{mP(\,a_{m-1}\leq\abs{X_i}<a_m)}=\sum_{n=1}^{\infty}{P(\,\abs{X_i}\geq a_{n-1})}  &&
+\end{flalign*}
+To see this, write $m=\sum_{n=1}^{m}{1}$ and then use Fubini’s theorem. We now let $Y_n=X_n1_{(\,\abs{X_n}<a_n)}$, and
+$T_n=Y_1+\ldots+Y_n$. When the sum is finite, $P(\,Y_n \neq X_n \,\,i.o.)=0$ and it suffices to investigate the behavior of the
+$T_n$. To do this, we let $a_0 = 0$ and compute
+\begin{equation*}
+\begin{split}
+\sum_{n=1}^{\infty}{var(Y_n/a_n)}&\leq\sum_{n=1}^{\infty}{E {Y_n}^2/{a_n}^2}\\
+&=\sum_{n=1}^{\infty}{{a_n}^{-2}\sum_{m=1}^{n}{\int_{\,[a_{m-1},a_m)}{y^2 dF(y)}}}\\
+&=\sum_{m=1}^{\infty}{\int_{\,[a_{m-1},a_m)}{y^2 dF(y)}\sum_{n=m}^{\infty}{{a_n}^{-2}}}      
+\end{split}
+\end{equation*}
+Since $a_n \geq na_m/m$, we have $\sum_{n=m}^{\infty}{{a_n}^{-2}} \leq (m^2/{a_m}^2)\sum_{n=m}^{\infty}{n^{-2}} \leq Cm{a_m}^{-2}$,\\so
+\begin{equation*}
+\leq C\sum_{m=1}^{\infty}{m\int_{\,[a_{m-1},a_m)}{dF(y)}}
+\end{equation*}
+Using $(\ast)$ now, we conclude $\sum_{n=1}^{\infty}{var(Y_n/a_n)}<\infty$.\\
+\indent The last step is to show $ET_n/a_n \rightarrow 0$. To begin, we note that if $E \abs{X_i}=\infty$,
+$\sum_{n=1}^{\infty}{P(\,\abs{X_i}>a_n)}<\infty$, and $a_n/n \uparrow$ we must have $a_n/n \uparrow \infty$.
+To estimate $ET_n/a_n$ now, we observe that
+\begin{equation*}
+\begin{split}
+\abs{{a_n}^{-1}\sum_{m=1}^{n}{EY_m}}&\leq {a_n}^{-1}n\sum_{m=1}^{n}{E(\,\abs{X_m};\,\abs{X_m}<a_m)}\\
+&\leq \frac{na_N}{a_n}+\frac{n}{a_n}E(\,\abs{X_i};a_N\leq\abs{X_i}<a_n)
+\end{split}
+\end{equation*}
+where the last inequality holds for any fixed $N$. Since $a_n/n \rightarrow \infty$, the
+first term converges to 0. Since $m/a_m \downarrow$, the second is
+\begin{equation*}
+\begin{split}
+&\leq \sum_{m=N+1}^{n}{\frac{m}{a_m}E(\,\abs{X_i};a_{m-1}\leq\abs{X_i}<a_m)}\\
+&\leq \sum_{m=N+1}^{n}{mP(\,a_{m-1}\leq\abs{X_i}<a_m)}
+\end{split}
+\end{equation*}
+$(\ast)$ shows that the sum is finite, so it is small if $N$ is large and the desired
+result follows.
+\end{proof}
+\end{theorem}
+\end{document}
